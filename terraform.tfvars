@@ -1,0 +1,6 @@
+apic_username = "apic#LOCAL\\fodermat"
+apic_password = "C1sc0123!"
+apic_url = "https://10.50.28.136"
+tenant = "TF_FODERMAT"
+vrf = "TF_vrf1"
+app_profile = "TF_3Tier_AP"
