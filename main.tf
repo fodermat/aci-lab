@@ -19,9 +19,9 @@ provider "aci" {
 
 
 module "contracts" {
-    source = "/modules/contracts"
+    source = "github.com/fodermat/aci-lab/modules/contracts"
 }
 
 module "epgs" {
-    source = "/modules/epgs"
+    source = "github.com/fodermat/aci-lab/modules/epgs"
 }
