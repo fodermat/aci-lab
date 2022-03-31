@@ -99,6 +99,17 @@ resource "aci_contract_subject" "tf_app_subj" {
   name                        = "TF_app-to-db_con"
  }
  
+ resource "aci_contract_subject" "tf_db_subj" {
+   contract_dn                  = aci_contract.tf_db-app_con.id
+   name                         = "tf_db_subj"
+   relation_vz_rs_subj_filt_att = [aci_filter.tf_icmp.id, aci_filter.tf_ssh.id]
+ }
+ 
+ resource "aci_contract" "tf_db-app_con" {
+  tenant_dn                 = module.epgs.tenant-dn
+  name                        = "TF_db-to-app_con"
+ }
+     
  resource "aci_application_epg" "Web_EPG" {
     name                   = "WEB_EPG"
     application_profile_dn = module.epgs.app-profile
@@ -115,4 +126,5 @@ resource "aci_application_epg" "backend_EPG" {
     name                   = "DB_EPG"
     application_profile_dn = module.epgs.app-profile
     relation_fv_rs_prov    = [aci_contract.tf_app-db_con.id]
+    relation_fv_rs_cons    = [aci_contract.tf_db-app_con.id
 }
