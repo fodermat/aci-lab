@@ -16,9 +16,9 @@ provider "aci" {
   insecure = true
 }
 
-#module "epgs" {
-#   source = "github.com/fodermat/aci-lab/main/modules/EPGs"
-#}
+module "epgs" {
+   source = "github.com/fodermat/aci-lab/modules/EPGs"
+}
 
 resource "aci_filter" "tf_icmp" {
    tenant_dn = module.epgs.tenant-dn
