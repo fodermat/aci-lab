@@ -17,7 +17,7 @@ provider "aci" {
 }
 
 module "epgs" {
-   source = "/Users/fodermat/Terraform/ACI-modules/modules/EPGs"
+   source = "./modules/EPGs"
 }
 
 resource "aci_filter" "tf_icmp" {
