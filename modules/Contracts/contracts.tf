@@ -17,7 +17,7 @@ provider "aci" {
 }
 
 module "epgs" {
-   source = "./modules/EPGs"
+   source = "https://github.com/fodermat/aci-lab/modules/EPGs"
 }
 
 resource "aci_filter" "tf_icmp" {
