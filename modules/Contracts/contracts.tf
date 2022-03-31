@@ -126,5 +126,5 @@ resource "aci_application_epg" "backend_EPG" {
     name                   = "DB_EPG"
     application_profile_dn = module.epgs.app-profile
     relation_fv_rs_prov    = [aci_contract.tf_app-db_con.id]
-    relation_fv_rs_cons    = [aci_contract.tf_db-app_con.id
+    relation_fv_rs_cons    = [aci_contract.tf_db-app_con.id]
 }
