@@ -19,9 +19,9 @@ provider "aci" {
 
 
 module "contracts" {
-    source = "./modules/contracts"
+    source = "/modules/contracts"
 }
 
 module "epgs" {
-    source = "./modules/epgs"
+    source = "/modules/epgs"
 }
