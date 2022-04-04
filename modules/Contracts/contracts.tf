@@ -82,6 +82,11 @@ resource "aci_filter_entry" "ssh" {
  } 
 
 # NEW HTTPS filter
+resource "aci_filter" "tf_https" {
+   tenant_dn = module.epgs.tenant-dn
+   name      = "tf_https"
+ }
+    
 resource "aci_filter_entry" "https" {
    name        = "https"
    filter_dn   = aci_filter.tf_https.id
