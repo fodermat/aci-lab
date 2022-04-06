@@ -80,7 +80,23 @@ resource "aci_filter_entry" "ssh" {
    d_to_port   = "22"
    stateful    = "yes"
  } 
-    
+
+# NEW HTTPS filter
+resource "aci_filter" "tf_https" {
+   tenant_dn = module.epgs.tenant-dn
+   name      = "tf_https"
+ }
+
+resource "aci_filter_entry" "https" {
+   name        = "https"
+   filter_dn   = aci_filter.tf_https.id
+   ether_t     = "ip"
+   prot        = "tcp"
+   d_from_port = "443"
+   d_to_port   = "443"
+   stateful    = "yes"
+ } 
+ 
 # APP to WEB contract & Subject    
 resource "aci_contract_subject" "tf_web_subj" {
    contract_dn                  = aci_contract.tf_app-web_con.id
@@ -117,11 +133,23 @@ resource "aci_contract_subject" "tf_app_subj" {
   name                        = "TF_db-to-app_con"
  }
  
+ # NEW WEB Provided contract for L3out
+resource "aci_contract_subject" "tf_l3out-web_subj" {
+   contract_dn                  = aci_contract.tf_l3out-web_con.id
+   name                         = "tf_l3out-web_subj"
+   relation_vz_rs_subj_filt_att = [aci_filter.tf_https.id]
+ }
+ 
+ resource "aci_contract" "tf_l3out-web_con" {
+  tenant_dn                 = module.epgs.tenant-dn
+  name                        = "TF_l3out-to-web_con"
+ }
+ 
  ### APPLYING CONTRACTS TO EPGS ###    
  resource "aci_application_epg" "Web_EPG" {
     name                   = "WEB_EPG"
     application_profile_dn = module.epgs.app-profile
-    relation_fv_rs_prov    = [aci_contract.tf_app-web_con.id]
+    relation_fv_rs_prov    = [aci_contract.tf_app-web_con.id, aci_contract.tf_l3out-web_con.id]
 }
 
 resource "aci_application_epg" "App_EPG" {
