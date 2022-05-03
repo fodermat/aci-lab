@@ -97,6 +97,22 @@ resource "aci_filter_entry" "https" {
    stateful    = "yes"
  } 
  
+# NEW TCP-8443 filter
+resource "aci_filter" "tf_8443" {
+   tenant_dn = module.epgs.tenant-dn
+   name      = "tf_8443"
+ }
+
+resource "aci_filter_entry" "tcp-8443" {
+   name        = "tcp-8443"
+   filter_dn   = aci_filter.tf_8443.id
+   ether_t     = "ip"
+   prot        = "tcp"
+   d_from_port = "8443"
+   d_to_port   = "8443"
+   stateful    = "yes"
+ }     
+    
 # APP to WEB contract & Subject    
 resource "aci_contract_subject" "tf_web_subj" {
    contract_dn                  = aci_contract.tf_app-web_con.id
@@ -137,7 +153,7 @@ resource "aci_contract_subject" "tf_app_subj" {
 resource "aci_contract_subject" "tf_l3out-web_subj" {
    contract_dn                  = aci_contract.tf_l3out-web_con.id
    name                         = "tf_l3out-web_subj"
-   relation_vz_rs_subj_filt_att = [aci_filter.tf_https.id]
+   relation_vz_rs_subj_filt_att = [aci_filter.tf_https.id, aci_filter.tf_8443.id]
  }
  
  resource "aci_contract" "tf_l3out-web_con" {
