@@ -26,7 +26,7 @@ variable "bridge_domains" {
     aci_bd_app = {
       bd_name          = "APP_BD"
       bd_alias         = "APP_BD"
-      subnet           = "20.20.20.254/24"
+      subnet           = "10.10.20.254/24"
       subnet_alias     = "front_Subnet"
     },
     aci_bd_web = {
