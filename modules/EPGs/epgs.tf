@@ -35,6 +35,7 @@ resource "aci_bridge_domain" "TF_BD" {
     tenant_dn   = aci_tenant.TF_tenant.id
     name        = each.value.bd_name
     name_alias  = each.value.bd_alias
+    relation_fv_rs_ctx = aci_vrf.TF_VRF.id 
 }
 
 resource "aci_subnet" "TF_Subnet" {
