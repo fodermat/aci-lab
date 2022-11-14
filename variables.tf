@@ -23,7 +23,7 @@ variable "bridge_domains" {
     aci_bd_db = {
       bd_name          = "DB_BD"
       bd_alias         = "DB_BD"
-      subnet           = "10.10.30.254/24"
+      subnet           = "30.30.30.254/24"
       subnet_alias     = "DB_Subnet"
     }
   }
