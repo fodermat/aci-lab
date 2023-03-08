@@ -9,8 +9,8 @@ variable "bridge_domains" {
   type = map
   default = {
     aci_bd_app = {
-      bd_name          = "front_BD"
-      bd_alias         = "front_BD"
+      bd_name          = "app_BD"
+      bd_alias         = "app_BD"
       subnet           = "20.20.20.254/24"
       subnet_alias     = "front_Subnet"
     },
