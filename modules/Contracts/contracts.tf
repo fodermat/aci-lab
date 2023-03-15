@@ -155,7 +155,8 @@ resource "aci_contract_subject" "tf_app_subj" {
 resource "aci_contract_subject" "tf_l3out-web_subj" {
    contract_dn                  = aci_contract.tf_l3out-web_con.id
    name                         = "tf_l3out-web_subj"
-   relation_vz_rs_subj_filt_att = [aci_filter.tf_https.id, aci_filter.tf_8443.id]
+   relation_vz_rs_subj_filt_att = [aci_filter.tf_https.id]
+#### add this filter to apply the tcp-8443: aci_filter.tf_8443.id ###     
  }
  
  resource "aci_contract" "tf_l3out-web_con" {
