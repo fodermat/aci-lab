@@ -100,20 +100,20 @@ resource "aci_filter_entry" "https" {
 ############### NEW TCP-8443 filter ######################
 ###########################################################
     
-#resource "aci_filter" "tf_8443" {
-#   tenant_dn = module.epgs.tenant-dn
-#   name      = "tf_8443"
-# }
+resource "aci_filter" "tf_8443" {
+   tenant_dn = module.epgs.tenant-dn
+   name      = "tf_8443"
+ }
 
-#resource "aci_filter_entry" "tcp-8443" {
-#   name        = "tcp-8443"
-#   filter_dn   = aci_filter.tf_8443.id
-#   ether_t     = "ip"
-#   prot        = "tcp"
-#   d_from_port = "8443"
-#   d_to_port   = "8443"
-#   stateful    = "yes"
-# }     
+resource "aci_filter_entry" "tcp-8443" {
+   name        = "tcp-8443"
+   filter_dn   = aci_filter.tf_8443.id
+   ether_t     = "ip"
+   prot        = "tcp"
+   d_from_port = "8443"
+   d_to_port   = "8443"
+   stateful    = "yes"
+ }     
     
 # APP to WEB contract & Subject    
 resource "aci_contract_subject" "tf_web_subj" {
